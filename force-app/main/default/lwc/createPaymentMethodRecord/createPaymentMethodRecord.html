@@ -1,0 +1,123 @@
+<template>
+        <lightning-card>
+            <div class="exampleHolder" if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+                    <h3 style="text-align: center; font-weight:700">Send Payment</h3>
+            <lightning-layout multiple-rows="false" class="slds-wrap">
+                        <lightning-layout-item size="12" 
+                            small-device-size="6" 
+                            medium-device-size="4" 
+                            large-device-size="12"
+                            padding="around-small">
+                            <lightning-input type="number"
+                                            name="amount"
+                                            label="Amount"
+                                            data-id = "checkValidity"
+                                            required="true"
+                                            step="0.01"
+                                            max-length="6"
+                                            min-length="1"
+                                            value={amount}
+                                            onchange={handleChange} >
+                            </lightning-input>
+    
+    
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" 
+                            small-device-size="6" 
+                            medium-device-size="4" 
+                            large-device-size="12"
+                            padding="around-small">
+                            <c-custom-lookup-component obj-name="Payment_Method__c" 
+                                              field-type="lookup" 
+                                              icon-name="standard:contact" 
+                                              label-name="Payment Method" 
+                                              name = "paymentMethodId"
+                                              placeholder="Search" 
+                                              value-id={recordId}
+                                              fields={fields}
+                                              display-fields={displayFields}
+                                              
+                                              onlookup={handleLookup} >
+                            </c-custom-lookup-component>
+                        </lightning-layout-item>
+
+                              
+                        <lightning-layout-item size="12" 
+                                            small-device-size="6" 
+                                            medium-device-size="4" 
+                                            large-device-size="12"
+                                            padding="around-small">
+
+                        <lightning-combobox
+                                    name="CurrencyCode"
+                                    label="Currency Code"
+                                    value={CurrencyCode}
+                                    required="true"
+                                    placeholder="Select Currency Code"
+                                    options={currencyCodeValue}
+                                    onchange={handleChange} >
+                        </lightning-combobox>
+    
+                                    <!--        <lightning-input type="text"
+                                            name="CurrencyCode"
+                                            label="Currency Code"
+                                            data-id = "checkValidity"
+                                            required="true"
+                                            max-length="16"
+                                            min-length="1"
+                                            value={currencyCode}
+                                            onchange={handleChange} >
+                            </lightning-input> 
+                            -->
+    
+                        
+    
+                        </lightning-layout-item>
+
+                    <!--    <lightning-layout-item size="12" 
+                            small-device-size="6" 
+                            medium-device-size="4" 
+                            large-device-size="6"
+                            padding="around-small">
+                            <lightning-input type="text"
+                                            name="Description"
+                                            label="Description"
+                                            data-id = "checkValidity"
+                                            required="true"
+                                            max-length="255"
+                                            min-length="1"
+                                            value={description}
+                                            onchange={handleChange} >
+                            </lightning-input>
+
+                            <lightning-layout-item size="12" 
+                            small-device-size="6" 
+                            medium-device-size="4" 
+                            large-device-size="6"
+                            padding="around-small">
+                            
+    </lightning-layout-item>  
+    
+                        </lightning-layout-item> -->
+                    <lightning-layout-item size="12" 
+                        small-device-size="6" 
+                        medium-device-size="4" 
+                        large-device-size="12"
+                        padding="around-small">   
+                        <lightning-button
+                                    name="CreatePayment"
+                                    label="Create Payment"
+                                    class="slds-align--absolute-center"
+                                    onclick={handleCharge}
+                                >
+    
+                        </lightning-button>
+                        
+                    </lightning-layout-item>
+        </lightning-layout>
+            
+        </lightning-card>
+    
+    </template>

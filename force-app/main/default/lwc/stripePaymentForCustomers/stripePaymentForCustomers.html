@@ -1,0 +1,219 @@
+<template>
+    <lightning-card>
+        <h3 class=" slds-align--absolute-center slds-text-heading--large slds-text-title_bold" >Instant Payment </h3>
+        <div class="exampleHolder" if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+        <lightning-layout multiple-rows="false" class="slds-wrap">
+            <lightning-layout-item size="12" 
+                        small-device-size="6" 
+                        medium-device-size="4" 
+                        large-device-size="12"
+                        padding="around-small"> 
+
+                    <lightning-input type="text"
+                                    name="Name"
+                                    label="Name"
+                                    data-id = "checkValidity"    
+                                    required="true"
+                                    value={record.Name}
+                                    onchange={handleChange} >    
+                    </lightning-input>
+
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" 
+                        small-device-size="6" 
+                        medium-device-size="4" 
+                        large-device-size="12"
+                        padding="around-small">
+
+                    <lightning-input type="email"
+                                    name="email"
+                                    label="Email"
+                                    data-id = "checkValidity"
+                                    required="true"
+                                    value={record.email}
+                                    onchange={handleChange} >
+                    </lightning-input>
+
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" 
+                        small-device-size="6" 
+                        medium-device-size="4" 
+                        large-device-size="12"
+                        padding="around-small">
+
+                        <lightning-input type="number"
+                                        name="cardNumber"
+                                        label="Card Number"
+                                        data-id = "checkValidity"
+                                        required="true"
+                                        max="9999999999999999"
+                                        min="1000000000000000"
+                                        max-length="16"
+                                        message-when-range-underflow = 'Please enter valid card number!'
+                                        value={record.cardNumber}
+                                        onchange={handleChange} >
+                        </lightning-input>
+
+
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" 
+                        small-device-size="6" 
+                        medium-device-size="4" 
+                        large-device-size="6"
+                        padding="around-small">
+
+                        <lightning-input type="number"
+                                            name="Cvv"
+                                            label="Cvv"
+                                            max	="9999"
+                                            min	="100"
+                                            max-length="4"
+                                            min-length="3"
+                                            required="true"
+                                            message-when-range-underflow = 'Please enter valid Cvv number!'
+                                            data-id = "checkValidity"
+                                            value={record.Cvv}
+                                            onchange={handleChange}>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+
+
+
+
+                    <lightning-layout-item size="12" 
+                                        small-device-size="6" 
+                                        medium-device-size="4" 
+                                        large-device-size="6"
+                                        padding="around-small">
+
+                    
+
+                    <lightning-input type="number"
+                                        name="cardExpiryMonth"
+                                        label="Card Expiry Month"
+                                        data-id = "checkValidity"
+                                        required="true"
+                                        min="1"
+                                        max="12"
+                                        value={record.cardExpiryMonth}
+                                        onchange={handleChange}>
+                     </lightning-input>
+
+                    </lightning-layout-item>
+
+
+                    <lightning-layout-item size="12" 
+                                            small-device-size="6" 
+                                            medium-device-size="4" 
+                                            large-device-size="6"
+                                            padding="around-small">
+
+                        <lightning-input type="number"
+                                            name="cardExpiryYear"
+                                            label="Card Expiry Year"
+                                            data-id = "checkValidity"
+                                            required="true"
+                                            max-length="4"
+                                            min-length="4"
+                                            message-when-range-underflow = 'Please enter valid Year number!'
+                                            min={currentYear}
+                                            value={record.cardExpiryYear}
+                                            onchange={handleChange}>
+                        </lightning-input>
+
+
+                    </lightning-layout-item>
+
+
+
+                    <lightning-layout-item size="12" 
+                                        small-device-size="6" 
+                                        medium-device-size="4" 
+                                        large-device-size="6"
+                                        padding="around-small">
+
+                    <lightning-input type="number"
+                                        name="Amount"
+                                        label="Service Fee"
+                                        data-id = "checkValidity"
+                                        max-length="6"
+                                        min-length="1"
+                                        required="true"
+                                        value={record.Amount}
+                                        onchange={handleChange} >
+                    </lightning-input>
+
+                    </lightning-layout-item>
+
+                
+
+
+
+                    <lightning-layout-item size="12" 
+                        small-device-size="6" 
+                        medium-device-size="4" 
+                        large-device-size="12"
+                        padding="around-small">
+
+                        <lightning-combobox
+                                    name="CurrencyCode"
+                                    label="Currency Code"
+                                    value={record.CurrencyCode}
+                                    placeholder="Select Currency Code"
+                                    options={currencyCodeValue}
+                                    data-id = "checkValidity"
+                                    required="true"
+                                    onchange={handleChange} >
+                        </lightning-combobox>
+<!--
+                        <p>Selected value is: {value}</p>
+                        <lightning-input type="text"
+                                name="CurrencyCode"
+                                label="CurrencyCode"
+                                data-id = "checkValidity"
+                                value={record.CurrencyCode}
+                                onchange={handleChange}
+                        >
+                        </lightning-input>
+-->
+                    </lightning-layout-item>
+<!--
+                    <lightning-layout-item size="12" 
+                        small-device-size="6" 
+                        medium-device-size="4" 
+                        large-device-size="12"
+                        padding="around-small">
+
+                        <lightning-input type="text"
+                                name="StripeId"
+                                label="Stripe Id"
+                                data-id = "checkValidity"
+                                value={record.StripeId}
+                                disabled="true"
+                        >
+                        </lightning-input>
+
+                    </lightning-layout-item>
+-->
+                    <lightning-button
+                                name="Charge"
+                                label="Charge"
+                                class="slds-align--absolute-center"
+                                onclick={handleCharge}
+                                disabled={record.StripeId}>
+
+                    </lightning-button>
+                    
+    </lightning-layout>
+        <!-- <c-popup onhandlecancel={closePopUp} if:true={showPopUp} emplyee-number={employeeNumber}>
+            
+        </c-popup>   -->
+    </lightning-card>
+
+</template>
