@@ -127,7 +127,7 @@ export default class CreatePaymentMethodRecord extends LightningElement {
                         inputcmp.reportValidity();
                         return validSoFar && inputcmp.checkValidity();
                     },true );
-                }
+                } 
         return validity;
     }
 }
